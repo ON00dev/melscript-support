@@ -13,9 +13,6 @@ const config: BuildOptions = {
   target: 'node12',
   outdir: './dist',
   outbase: './src',
-  outExtension: {
-    '.js': '.cjs',
-  },
   format: 'cjs',
   external: ['vscode'],
   loader: {

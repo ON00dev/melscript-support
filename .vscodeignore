@@ -1,24 +1,26 @@
-# Files to include in the extension package
-# Documentation for this format:
-# https://code.visualstudio.com/api/working-with-extensions/publishing-extension#using-.vscodeignore
+# Include dist
+!dist
+!dist/**
 
-# Files for vscode extension
-!CHANGELOG.md
-!LICENSE
-!README.md
-!logo.png
+# Exclude source code and build scripts
+src
+build
+node_modules
+.github
+.vscode
 
-# Translation files
-!package.json
-!package.nls.json
-!package.nls.*.json
+# Exclude configuration files
+tsconfig.json
+tsconfig.*.json
+biome.json
+knip.json
+sheriff.config.ts
+.editorconfig
+.gitattributes
+.gitignore
+bun.lockb
+package-lock.json
 
-# Extension code
-!dist/extension
-!dist/material-icons.json
-
-# Icons
-!icons
-
-# Exclude everything else
-**/*
+# Exclude documentation and others
+CONTRIBUTING.md
+CHANGELOG.md

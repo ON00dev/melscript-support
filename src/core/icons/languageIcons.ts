@@ -15,6 +15,7 @@ export const languageIcons: LanguageIcon[] = [
   },
   { name: 'xml', ids: ['xml', 'xquery', 'xsl'] },
   { name: 'matlab', ids: ['matlab'] },
+  { name: 'file_type_mel', ids: ['mel'] },
   {
     name: 'settings',
     ids: ['makefile', 'ini', 'properties', 'spring-boot-properties'],

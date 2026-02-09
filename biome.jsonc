@@ -15,7 +15,9 @@
       "!**/dist",
       "!**/node_modules",
       "!**/package.json",
-      "!**/bun.lock"
+      "!**/bun.lock",
+      "!**/syntaxes",
+      "!**/language-configuration.json"
     ]
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
