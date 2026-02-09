@@ -31,13 +31,8 @@
   },
   "publisher": "ON00dev",
   "author": {
-    "name": "Material Extensions",
-    "email": "material-icons-extensions@googlegroups.com",
-    "url": "https://github.com/material-extensions"
-  },
-  "funding": "https://github.com/sponsors/material-extensions",
-  "sponsor": {
-    "url": "https://github.com/sponsors/material-extensions"
+    "name": "ON00dev",
+    "url": "https://github.com/melscript-org"
   },
   "engines": {
     "vscode": "^1.55.0"
@@ -50,7 +45,7 @@
   "bugs": {
     "url": "https://github.com/melscript-org/MelScript/issues"
   },
-  "icon": "media/image.png",
+  "icon": "logo.png",
   "galleryBanner": {
     "color": "#282c34",
     "theme": "dark"
@@ -135,7 +130,7 @@
     "iconThemes": [
       {
         "id": "material-icon-theme",
-        "label": "Material Icon Theme",
+        "label": "MelScript Material Icons",
         "path": "./dist/material-icons.json",
         "_watch": true
       }
