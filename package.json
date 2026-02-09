@@ -2,7 +2,7 @@
   "name": "melscript-support",
   "displayName": "MelScript Support",
   "description": "Official MelScript syntax highlighting and Material Design Icons for Visual Studio Code.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "MIT",
   "scripts": {
     "precompile": "rimraf dist && npm run verify",
