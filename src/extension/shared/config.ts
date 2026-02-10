@@ -14,8 +14,10 @@ export const getConfig = (section?: string) => {
 
 /** Get list of configuration entries of package.json */
 export const getConfigProperties = (): { [config: string]: unknown } => {
-  return extensions.getExtension(`${extensionPublisher}.${extensionName}`)
-    ?.packageJSON?.contributes?.configuration?.properties;
+  return (
+    extensions.getExtension(`${extensionPublisher}.${extensionName}`)
+      ?.packageJSON?.contributes?.configuration?.properties ?? {}
+  );
 };
 
 /** Get list of all configration properties */

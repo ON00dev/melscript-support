@@ -1,0 +1,92 @@
+{
+	"name": "MelScript",
+	"scopeName": "source.mel",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#variables"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.mel",
+					"match": "//.*$"
+				},
+				{
+					"name": "comment.block.mel",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.mel",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.mel",
+					"match": "\\\\."
+				}
+			]
+		},
+		"numbers": {
+			"name": "constant.numeric.mel",
+			"match": "\\b\\d+(\\.\\d+)?\\b"
+		},
+		"constants": {
+			"name": "constant.language.mel",
+			"match": "\\b(true|false|null)\\b"
+		},
+		"types": {
+			"name": "storage.type.mel",
+			"match": "\\b(int|float|string|bool|void)\\b"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.mel",
+					"match": "\\b(if|else|while|for|return|break|continue)\\b"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.mel"
+						}
+					}
+				}
+			]
+		},
+		"variables": {
+			"name": "variable.other.mel",
+			"match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+		}
+	}
+}
