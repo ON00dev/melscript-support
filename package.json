@@ -1,0 +1,540 @@
+{
+  "name": "melscript-support",
+  "displayName": "MelScript Support",
+  "description": "Official MelScript syntax highlighting and Material Design Icons for Visual Studio Code.",
+  "version": "1.2.2",
+  "license": "MIT",
+  "scripts": {
+    "precompile": "rimraf dist && npm run verify",
+    "compile": "tsc -p ./",
+    "compile:declarations": "tsc -p ./tsconfig.declarations.json",
+    "postcompile": "npm run compile:declarations && npm run generateJson && npm run generateClones && npm run check",
+    "build": "npm run compile && tsx ./build/build-with-esbuild.ts",
+    "watch": "tsx ./build/watch-with-esbuild.ts",
+    "check-colors": "tsx ./src/scripts/svg/checkSvgColors.ts",
+    "check": "tsx ./src/scripts/icons/checks/run.ts",
+    "contributors": "tsx ./src/scripts/contributors/contributors.ts",
+    "generateJson": "tsx ./src/scripts/icons/generateJson.ts > ./dist/material-icons.json",
+    "generateClones": "tsx ./src/scripts/icons/generateClones.ts",
+    "lint": "biome check",
+    "markdownlint": "markdownlint '**/*.md'",
+    "format": "biome format --write ./src",
+    "preversion": "npm run contributors && npm run preview && npm run svgo && git add images/*.png icons/*.svg",
+    "preview": "tsx ./src/scripts/preview/run.ts",
+    "svgo": "svgo -i icons -o icons -q",
+    "test": "echo 'Skipping tests because bun is not installed'",
+    "vscode:prepublish": "npm run lint && npm run build",
+    "verify": "sheriff verify",
+    "prepublishOnly": "tsx ./src/scripts/module/prepare.ts",
+    "postpublish": "git checkout package.json && git checkout README.md",
+    "prepare": "husky"
+  },
+  "publisher": "ON00dev",
+  "author": {
+    "name": "ON00dev",
+    "url": "https://github.com/melscript-org"
+  },
+  "engines": {
+    "vscode": "^1.55.0"
+  },
+  "homepage": "https://github.com/melscript-org/MelScript/blob/main/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melscript-org/MelScript"
+  },
+  "bugs": {
+    "url": "https://github.com/melscript-org/MelScript/issues"
+  },
+  "icon": "logo.png",
+  "galleryBanner": {
+    "color": "#282c34",
+    "theme": "dark"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "melscript",
+    "mel",
+    "html",
+    "syntax",
+    "highlighting",
+    "icons",
+    "theme",
+    "material",
+    "icon-theme",
+    "customization"
+  ],
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    },
+    "virtualWorkspaces": true
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onLanguage:mel"
+  ],
+  "files": [
+    "dist",
+    "icons",
+    "images",
+    "media",
+    "syntaxes",
+    "language-configuration.json",
+    "package.json",
+    "LICENSE",
+    "README.md",
+    "logo.png"
+  ],
+  "main": "./dist/extension/desktop/extension.js",
+  "browser": "./dist/extension/web/extension.js",
+  "module": "./dist/module/index.js",
+  "types": "./dist/types/module/index.d.ts",
+  "sideEffects": false,
+  "contributes": {
+    "languages": [
+      {
+        "id": "mel",
+        "aliases": [
+          "MelScript",
+          "mel"
+        ],
+        "extensions": [
+          ".mel"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/file_type_mel.svg",
+          "dark": "./icons/file_type_mel.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "mel",
+        "scopeName": "source.mel",
+        "path": "./syntaxes/mel.tmLanguage.json"
+      },
+      {
+        "scopeName": "melscript.injection",
+        "path": "./syntaxes/mel-injection.json",
+        "injectTo": [
+          "text.html",
+          "text.html.basic",
+          "text.html.derivative"
+        ]
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "melscript-support",
+        "label": "MelScript Material Icons",
+        "path": "./dist/material-icons.json",
+        "_watch": true
+      }
+    ],
+    "commands": [
+      {
+        "command": "melscript-support.activateIcons",
+        "title": "%command.activateIcons%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.toggleIconPacks",
+        "title": "%command.toggleIconPacks%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.changeFolderTheme",
+        "title": "%command.changeFolderTheme%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.changeFolderColor",
+        "title": "%command.changeFolderColor%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.changeRootFolderColor",
+        "title": "%command.changeRootFolderColor%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.changeFileColor",
+        "title": "%command.changeFileColor%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.restoreDefaultConfig",
+        "title": "%command.restoreDefaultConfig%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.toggleExplorerArrows",
+        "title": "%command.toggleExplorerArrows%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.changeOpacity",
+        "title": "%command.changeOpacity%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.toggleGrayscale",
+        "title": "%command.toggleGrayscale%",
+        "enablement": "!isWeb"
+      },
+      {
+        "command": "melscript-support.changeSaturation",
+        "title": "%command.changeSaturation%",
+        "enablement": "!isWeb"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "%configuration.title%",
+      "properties": {
+        "melscript-support.activeIconPack": {
+          "type": "string",
+          "default": "angular",
+          "description": "%configuration.activeIconPack%",
+          "enumDescriptions": [
+            "%configuration.activeIconPack.angular%",
+            "%configuration.activeIconPack.angular_ngrx%",
+            "%configuration.activeIconPack.react%",
+            "%configuration.activeIconPack.react_redux%",
+            "%configuration.activeIconPack.roblox%",
+            "%configuration.activeIconPack.qwik%",
+            "%configuration.activeIconPack.vue%",
+            "%configuration.activeIconPack.vue_vuex%",
+            "%configuration.activeIconPack.nest%",
+            "%configuration.activeIconPack.bashly%",
+            "%configuration.activeIconPack.none%"
+          ],
+          "enum": [
+            "angular",
+            "angular_ngrx",
+            "react",
+            "react_redux",
+            "roblox",
+            "qwik",
+            "vue",
+            "vue_vuex",
+            "nest",
+            "bashly",
+            "none"
+          ]
+        },
+        "melscript-support.files.associations": {
+          "type": "object",
+          "default": {},
+          "description": "%configuration.files.associations%"
+        },
+        "melscript-support.folders.associations": {
+          "type": "object",
+          "default": {},
+          "description": "%configuration.folders.associations%"
+        },
+        "melscript-support.rootFolders.associations": {
+          "type": "object",
+          "default": {},
+          "description": "%configuration.rootFolders.associations%"
+        },
+        "melscript-support.languages.associations": {
+          "type": "object",
+          "default": {},
+          "description": "%configuration.languages.associations%"
+        },
+        "melscript-support.files.customClones": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "%configuration.customClones.name%"
+              },
+              "base": {
+                "type": "string",
+                "description": "%configuration.customClones.base%"
+              },
+              "color": {
+                "type": "string",
+                "description": "%configuration.customClones.color%"
+              },
+              "lightColor": {
+                "type": "string",
+                "description": "%configuration.customClones.lightColor%"
+              },
+              "fileNames": {
+                "type": "array",
+                "default": [],
+                "description": "%configuration.customClones.fileNames%",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fileExtensions": {
+                "type": "array",
+                "default": [],
+                "description": "%configuration.customClones.fileExtensions%",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "activeForPacks": {
+                "type": "array",
+                "default": [
+                  "angular"
+                ],
+                "description": "%configuration.customClones.activeForPacks%",
+                "items": {
+                  "type": "string",
+                  "enumDescriptions": [
+                    "%configuration.activeIconPack.angular%",
+                    "%configuration.activeIconPack.angular_ngrx%",
+                    "%configuration.activeIconPack.react%",
+                    "%configuration.activeIconPack.react_redux%",
+                    "%configuration.activeIconPack.roblox%",
+                    "%configuration.activeIconPack.qwik%",
+                    "%configuration.activeIconPack.vue%",
+                    "%configuration.activeIconPack.vue_vuex%",
+                    "%configuration.activeIconPack.nest%",
+                    "%configuration.activeIconPack.bashly%",
+                    "%configuration.activeIconPack.none%"
+                  ],
+                  "enum": [
+                    "angular",
+                    "angular_ngrx",
+                    "react",
+                    "react_redux",
+                    "qwik",
+                    "vue",
+                    "vue_vuex",
+                    "nest",
+                    "bashly",
+                    "none"
+                  ]
+                }
+              }
+            }
+          },
+          "description": "%configuration.customClones%"
+        },
+        "melscript-support.languages.customClones": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "%configuration.customClones.name%"
+              },
+              "base": {
+                "type": "string",
+                "description": "%configuration.customClones.base%"
+              },
+              "color": {
+                "type": "string",
+                "description": "%configuration.customClones.color%"
+              },
+              "lightColor": {
+                "type": "string",
+                "description": "%configuration.customClones.lightColor%"
+              },
+              "ids": {
+                "type": "array",
+                "default": [],
+                "description": "%configuration.customClones.ids%",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "activeForPacks": {
+                "type": "array",
+                "default": [
+                  "angular"
+                ],
+                "description": "%configuration.customClones.activeForPacks%",
+                "items": {
+                  "type": "string",
+                  "enumDescriptions": [
+                    "%configuration.activeIconPack.angular%",
+                    "%configuration.activeIconPack.angular_ngrx%",
+                    "%configuration.activeIconPack.react%",
+                    "%configuration.activeIconPack.react_redux%",
+                    "%configuration.activeIconPack.roblox%",
+                    "%configuration.activeIconPack.qwik%",
+                    "%configuration.activeIconPack.vue%",
+                    "%configuration.activeIconPack.vue_vuex%",
+                    "%configuration.activeIconPack.nest%",
+                    "%configuration.activeIconPack.bashly%",
+                    "%configuration.activeIconPack.none%"
+                  ],
+                  "enum": [
+                    "angular",
+                    "angular_ngrx",
+                    "react",
+                    "react_redux",
+                    "qwik",
+                    "vue",
+                    "vue_vuex",
+                    "nest",
+                    "bashly",
+                    "none"
+                  ]
+                }
+              }
+            }
+          },
+          "description": "%configuration.customClones%"
+        },
+        "melscript-support.folders.customClones": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "%configuration.customClones.name%"
+              },
+              "base": {
+                "type": "string",
+                "description": "%configuration.customClones.base%"
+              },
+              "color": {
+                "type": "string",
+                "description": "%configuration.customClones.color%"
+              },
+              "lightColor": {
+                "type": "string",
+                "description": "%configuration.customClones.lightColor%"
+              },
+              "folderNames": {
+                "type": "array",
+                "description": "%configuration.customClones.folderNames%",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "rootFolderNames": {
+                "type": "array",
+                "description": "%configuration.customClones.rootFolderNames%",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "description": "%configuration.customClones%"
+        },
+        "melscript-support.folders.theme": {
+          "type": "string",
+          "default": "specific",
+          "description": "%configuration.folders.theme%",
+          "enumDescriptions": [
+            "%configuration.folders.theme.specific%",
+            "%configuration.folders.theme.classic%",
+            "%configuration.folders.theme.none%"
+          ],
+          "enum": [
+            "specific",
+            "classic",
+            "none"
+          ]
+        },
+        "melscript-support.folders.color": {
+          "type": "string",
+          "default": "#90a4ae",
+          "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+          "description": "%configuration.folders.color%"
+        },
+        "melscript-support.rootFolders.color": {
+          "type": "string",
+          "default": "#90a4ae",
+          "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+          "description": "%configuration.rootFolders.color%"
+        },
+        "melscript-support.files.color": {
+          "type": "string",
+          "default": "#90a4ae",
+          "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$",
+          "description": "%configuration.files.color%"
+        },
+        "melscript-support.opacity": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "%configuration.opacity%"
+        },
+        "melscript-support.hidesExplorerArrows": {
+          "type": "boolean",
+          "default": false,
+          "description": "%configuration.hidesExplorerArrows%"
+        },
+        "melscript-support.saturation": {
+          "type": "number",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1,
+          "description": "%configuration.saturation%"
+        },
+        "melscript-support.enableLogging": {
+          "type": "boolean",
+          "default": false,
+          "description": "%configuration.enableLogging%"
+        },
+        "melscript-support.logLevel": {
+          "type": "string",
+          "default": "info",
+          "enum": [
+            "info",
+            "error",
+            "debug"
+          ],
+          "description": "%configuration.logLevel%"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "chroma-js": "^3.1.2",
+    "events": "^3.3.0",
+    "fast-deep-equal": "^3.1.3",
+    "svgson": "^5.3.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.4",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@softarc/sheriff-core": "^0.19.1",
+    "@types/chroma-js": "^3.1.1",
+    "@types/puppeteer": "^7.0.4",
+    "@types/vscode": "~1.55.0",
+    "axios": "^1.11.0",
+    "bun-types": "^1.2.20",
+    "changelogen": "0.6.2",
+    "commitlint": "^20.0.0",
+    "esbuild": "^0.27.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
+    "markdownlint-cli": "^0.45.0",
+    "puppeteer": "^24.16.1",
+    "rimraf": "^6.0.1",
+    "svg-color-linter": "^3.0.0",
+    "svgo": "^4.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.2"
+  },
+  "patchedDependencies": {
+    "changelogen@0.6.2": "patches/changelogen@0.6.2.patch"
+  }
+}
