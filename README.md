@@ -12,12 +12,12 @@
 
 ## Overview
 
-This extension provides comprehensive support for **MelScript** development in Visual Studio Code. It combines accurate syntax highlighting for `.mel` files with the beautiful **Material Icon Theme**, ensuring a complete and visually pleasing development environment.
+This extension provides comprehensive support for the **MelScript** programming language in Visual Studio Code. It combines accurate syntax highlighting for `.mel` files with the beautiful **Material Icon Theme**, ensuring a complete and visually pleasing development environment.
 
 ## Features
 
-- **MelScript Syntax Highlighting**: Full syntax highlighting support for `.mel` files.
-- **Material Design Icons**: Integrated Material Icon Theme with specific icon support for MelScript files.
+- **MelScript Syntax Highlighting**: Full syntax highlighting support for `.mel` files, designed specifically for the MelScript language.
+- **Material Design Icons**: Integrated Material Icon Theme with specific icon support for MelScript files and project structures.
 - **Customizable**: All the powerful customization features of the Material Icon Theme (folder themes, color customization, opacity, etc.) are available.
 
 ## Installation
@@ -31,19 +31,23 @@ This extension provides comprehensive support for **MelScript** development in V
 
 ### Syntax Highlighting
 
-Open any `.mel` file, and syntax highlighting will be applied automatically.
+Open any `.mel` file, and syntax highlighting will be applied automatically. The grammar supports:
+- Basic control structures (`if`, `else`, `while`, `for`)
+- Native types (`int`, `float`, `string`, `bool`, `void`)
+- Function definitions and calls
+- Comments and Strings
 
 ### Icon Theme
 
 To activate the icon theme:
 
 1. Open the **Command Palette** (`Ctrl+Shift+P` or `Cmd+Shift+P`)
-2. Type `Material Icons: Activate Icon Theme`
+2. Type `MelScript Icons: Activate Icon Theme`
 3. Select it to apply the icons.
 
 ## Customization
 
-You can customize the appearance of the icons (opacity, saturation, folder themes, etc.) via User Settings or Command Palette, just like the original Material Icon Theme.
+You can customize the appearance of the icons (opacity, saturation, folder themes, etc.) via User Settings or Command Palette.
 
 ## Contributing
 
@@ -51,4 +55,4 @@ We welcome contributions! Please feel free to submit issues and pull requests to
 
 ## Credits
 
-This project is a fork of the [Material Icon Theme](https://github.com/material-extensions/vscode-material-icon-theme), extended to provide first-class support for MelScript.
+This project integrates the **Material Icon Theme** to provide a rich visual experience for MelScript developers.
